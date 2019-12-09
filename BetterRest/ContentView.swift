@@ -28,14 +28,16 @@ struct ContentView: View {
                     Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
                         Text("\(sleepAmount, specifier: "%g") hours")
                     }
+                    .accessibility(value: Text("\(sleepAmount) hours of sleep"))
                 }
-                    
+                
                 Section(header: Text("Daily coffee intake")) {
                     Picker("", selection: $coffeeAmount) {
                         ForEach(1...20, id: \.self) {
                             Text("\($0) \($0 == 1 ? "cup" : "cups")")
                         }
                     }
+                .accessibility(value: Text("\(coffeeAmount) cups of coffee"))
                 }
                 
                 Section(header: Text("🛌⏰")) {
@@ -45,7 +47,7 @@ struct ContentView: View {
             }
             .navigationBarTitle("BetterRest")
             .alert(isPresented: $showingAlert) {
-                  Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
         }
     }
